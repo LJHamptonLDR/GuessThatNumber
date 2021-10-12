@@ -23,7 +23,7 @@ let playAgain;
 alert(`Welcome to "GUESS THAT NUMBER!" Please click "OK to start the game.`)
 
 // 
-while (restartGame){
+while (restartGame) {
     // Ask user to enter a number to set the upper bound for the random number that will be created (AKA the number to be guessed).
     // 
     rangeNum = prompt(`Please enter a maximum number for the range:`);
@@ -32,7 +32,7 @@ while (restartGame){
     rangeNum = parseInt(rangeNum);
 
     // Verifies the user's entry for the range number (a number greater than zero (NOTE: NaN has a default boolean value of false. Also all numbers, positive and negative, have a default boolean value of true. The only exception is zero which has a default boolean value of false.))
-    while (!rangeNum || rangeNum < 1){
+    while (!rangeNum || rangeNum < 1) {
         rangeNum = prompt(enterNumText);
         rangeNum = parseInt(rangeNum);
     }
@@ -44,27 +44,44 @@ while (restartGame){
     attempts = parseint(prompt(`Please enter a number of attempts allowed:`));
 
     // Verifies the user's entry for a number of attempts allowed (a number greater than zero)
-    while (!attempts || attempts < 1){
+    while (!attempts || attempts < 1) {
         attempts = parseInt(prompt(enterNumText));
     }
 
     // Ask user to enter a guess in the range that they set
     guess = prompt(`Please enter a guess from 1 to ${rangeNum}. You have ${attempts} attempt(s) left:`)
-    
+
     // Continues looping until the user guesses the correct number or runs out of attempts (NOTE: Loops until a break keyword is ran)
-    while (true){
+    while (true) {
         // Attempts to convert the user's guess into a number
         guess = parseInt(guess);
 
         // Verifies the user's guess (a number greater than zero) as well as a number within the range set by the user
-        while (!guess || guess < 1 || guess > rangeNum){
+        while (!guess || guess < 1 || guess > rangeNum) {
             guess = parseInt(prompt(`Please enter a number from 1 to ${rangeNum}`))
         }
 
         // Removes an attempt
         attempts--;
 
-        break;
+        //
+        if (guess === randomNum) {
+            alert(`CONGRATULATIONS YOU GUESSED THE CORRECT NUMBER: ${randomNum}`);
+            break;
+
+            // Checks if user has any attempts left. If not, then the game ends and the number is displayed to the user.
+        } else if (attempts === 0) {
+            alert(`Sorry, but you have run out of attempts :(. The number was ${randomNum}`);
+            break;
+
+            // Checks if user's guess was too low and prompts user to guess again if that is the case
+        } else if (guess < randomNum) {
+            guess = prompt(`Too low. You have ${attempts} attempt(s) left`);
+
+            // The only other possibility is that the user's guess was too high so the user is prompted to guess again
+        } else {
+            guess = prompt(`Too high. You have ${attempts} attempt(s) left`);
+        }
     }
 
     break;
