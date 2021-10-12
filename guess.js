@@ -18,3 +18,27 @@ let guess;
 
 // For storing the user's response to play again or not
 let playAgain;
+
+// Starting alert message
+alert(`Welcome to "GUESS THAT NUMBER!" Please click "OK to start the game.`)
+
+// 
+while (restartGame){
+    // Ask user to enter a number to set the upper bound for the random number that will be created (AKA the number to be guessed).
+    // 
+    rangeNum = prompt(`Please enter a maximum number for the range:`);
+
+    // Using parseInt to attempt to convert the user's response into a number value. (NOTE: the value returned from a prompt is a string value. Also, if the value cannot be converted then the value returned will be NaN (Not A Number))
+    rangeNum = parseInt(rangeNum);
+
+    // Verifies the user's entry for the range number (a number greater than zero (NOTE: NaN has a default boolean value of false. Also all numbers, positive and negative, have a default boolean value of true. The only exception is zero which has a default boolean value of false.))
+    while (!rangeNum || rangeNum < 1){
+        rangeNum = prompt(enterNumText);
+        rangeNum = parseInt(rangeNum);
+    }
+
+    // Creates the random number (AKA Number to be guessed by the user) using the range number entered by the user
+    randomNum = Math.floor(Math.random() * rangeNum) + 1;
+
+    break;
+}
